@@ -9,6 +9,8 @@ app.get('/', (req, res) => {
 });
 
 app.use(cors());
+
+//for getting body data
 app.use(express.json());
 
 const users = [
@@ -21,8 +23,8 @@ const users = [
     { id: 7, name: 'juboraj', email: 'juboraj@gmail.com', phone: '854545' }
 ];
 
+//filtered by search query parameter
 app.get('/users', (req, res) => {
-    //filtered by search query parameter
     if (req.query.name) {
         const search = req.query.name.toLowerCase();
         const matched = users.filter(user => user.name.toLowerCase().includes(search));
@@ -45,8 +47,8 @@ app.post('/user', (req, res) => {
     user.id = users.length + 1;
     users.push(user);
     res.send(user)
-})
+});
 
 app.listen(port, () => {
     console.log('litstenint mama', port)
-})
+});
